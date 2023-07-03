@@ -2,9 +2,20 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import prismadb from "@/lib/primadb";
 import { compare } from "bcrypt";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 export default NextAuth({
     providers: [
+        GithubProvider({
+            clientId: process.env.GITHUB_ID || "",
+            clientSecret: process.env.GITHUB_SECRET || "",
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID || "",
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+        }),
         Credentials({
             id: "credentials",
             name: "Credentials",
@@ -19,7 +30,7 @@ export default NextAuth({
                 },
             },
             authorize: async (credentials) => {
-                if (credentials?.email || credentials?.password || credentials == undefined) {
+                if (credentials == undefined || !credentials?.email || !credentials?.password) {
                     throw new Error("email and password required.")
                 }
                 const user = await prismadb.user.findUnique({
@@ -38,10 +49,11 @@ export default NextAuth({
             }
         })
     ],
-    pages : {
+    pages: {
         signIn: "/auth",
     },
     debug: process.env.NODE_ENV === "development",
+    adapter: PrismaAdapter(prismadb),
     session: {
         strategy: "jwt"
     },
