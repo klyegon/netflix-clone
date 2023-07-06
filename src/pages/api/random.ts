@@ -5,7 +5,7 @@ import serverAuth from "@/lib/serverAuth";
 export default async function handler(request: NextApiRequest, response: NextApiResponse) {
     if (request.method != "GET") return response.status(405).end();
     try {
-        await serverAuth(request);
+        await serverAuth(request, response);
 
         const movieCount = await prismadb.movie.count();
         const randomIndex = Math.floor(Math.random() * movieCount);

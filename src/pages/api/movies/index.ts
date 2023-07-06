@@ -6,7 +6,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
     if (request.method != "GET") return response.status(405).end()
 
     try {
-        await serverAuth(request);
+        await serverAuth(request, response);
         const movies = await prismadb.movie.findMany();
         return response.status(200).json(movies);
     } catch (error) {

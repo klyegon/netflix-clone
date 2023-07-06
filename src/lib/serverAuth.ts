@@ -1,9 +1,11 @@
-import { NextApiRequest } from "next";
-import { getSession } from "next-auth/react";
+import { NextApiRequest, NextApiResponse } from "next";
 import prismadb from "@/lib/primadb"
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
-const serverAuth = async (request: NextApiRequest) => {
-    const session = await getSession({req: request});
+
+const serverAuth = async (request: NextApiRequest, response: NextApiResponse) => {
+    const session = await getServerSession(request, response,  authOptions);
     if (!session?.user?.email) {
         throw new Error("Not sign in")
     }
