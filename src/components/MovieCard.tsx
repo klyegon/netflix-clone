@@ -1,5 +1,6 @@
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
+import FavouriteButton from "./FavouriteButton";
 
 type Props = {
   movie: Record<string, any>;
@@ -27,6 +28,7 @@ const MovieCard: React.FC<Props> = ({ movie }: Props) => {
             >
               <BsFillPlayFill size={30} />
             </div>
+            <FavouriteButton movieId={movie.id} />
           </div>
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>
@@ -37,9 +39,7 @@ const MovieCard: React.FC<Props> = ({ movie }: Props) => {
             </p>
           </div>
           <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">
-              {movie.genre}
-            </p>
+            <p className="text-white text-[10px] lg:text-sm">{movie.genre}</p>
           </div>
         </div>
       </div>
