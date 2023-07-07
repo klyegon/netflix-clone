@@ -27,11 +27,11 @@ export const Navbar: React.FC<Props> = (props: Props) => {
 
     const toggleMobileMenu = useCallback(() => {
         setShowMobileMenu(currentValue => !currentValue);
-    }, [showMobileMenu])
+    }, [setShowMobileMenu])
 
     const toggleAccountMenu = useCallback(() => {
         setShowAccountMenu(currentValue => !currentValue);
-    }, [showMobileMenu])
+    }, [setShowAccountMenu])
 
     return (
         <nav className='w-full fixed z-40'>
