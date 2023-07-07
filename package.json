@@ -25,7 +25,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "swr": "^2.2.0",
-    "typescript": "5.1.5"
+    "typescript": "5.1.5",
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
