@@ -1,6 +1,7 @@
 import useBillBoard from '@/hooks/useBillboard'
 import React from 'react'
 import { AiOutlineInfoCircle } from "react-icons/ai"
+import PlayButton from './PlayButton'
 
 type Props = {}
 
@@ -25,6 +26,7 @@ const Billboard: React.FC<Props> = (props: Props) => {
                 <p className='text-white text-1xl md:text-5xl h-full w-[50%] lg:text-6xl font-bold drop-shadow-xl'>{movie?.title}</p>
                 <p className='text-white text-[8px] md:text-lg mt-3 md:mt-8 w-[90%] md:w-[80%] lg:w-[50%] drop-shadow-xl'>{movie?.description}</p>
                 <div className="flex flex-row items-center mt-3 md:mt-4 gap-3">
+                    <PlayButton movieId={movie?.id}/>
                     <button className='
                     bg-white
                     text-white
